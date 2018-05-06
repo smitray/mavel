@@ -1,0 +1,6 @@
+desktop: 'screen and (width >= 1281px)'
+desktopS: 'screen and (1025px <= width <= 1280px)'
+tablet: 'screen and (768px <= width <= 1024px)'
+tabletLd: 'screen and (768px <= width <= 1024px) and (orientation: landscape)'
+phoneL: 'screen and (481px <= width <= 767px)'
+phone: 'screen and (320px <= width <= 480px)'

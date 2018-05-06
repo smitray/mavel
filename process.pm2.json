@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "awaz",
+            "script": "npm",
+            "args" : "start"
+        }
+    ]
+}
