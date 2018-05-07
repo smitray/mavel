@@ -1,1 +1,4 @@
-export default from './modules';
+export {
+  routerControl,
+  ioControl
+} from './modules';
