@@ -1,35 +1,60 @@
-html, body
-{
-  background-color: #fff;
-  color: #2e2f30;
-  letter-spacing: 0.5px;
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  height: 100vh;
-  margin: 0;
+html {
+  font-size: 62.5%;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  -ms-overflow-style: scrollbar;
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
-footer
-{
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid #ddd;
+body {
+  h: 100%;
+  fz: 1.8rem;
+  color: #000 #FFF;
+  t-r: optimizeLegibility;
+  ff: system-ui;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  -moz-osx-font-smoothing: grayscale;
+  mih: 100vh;
+  lh: 1.2;
+  pos: relative;
+  fw: normal;
+  ff: 'Titillium Web', sans-serif;
 }
 
-a, a:hover, a:focus, a:visited
-{
-  color: #41B883;
-}
+.container {
+  mih: 1px;
 
-.logo {
-  width: 243px;
-  height: 218px;
-}
+  &--full {
+    w: 100%;
+  }
 
-.page-enter-active, .page-leave-active
-{
-  transition: opacity .5s
-}
-.page-enter, .page-leave-active
-{
-  opacity: 0
+  &--block {
+    w: 80%;
+    m: 0 auto;
+
+    &__ct {
+      w: 55%;
+      m: 0 auto;
+    }
+  }
+
+  &--wr {
+    display: block;
+
+    &:after, &:before {
+      cnt: '';
+      cl: both;
+      d: table;
+    }
+  }
+  &--rel {
+    pos: relative;
+  }
+  &--ovh {
+    ofl: hidden;
+  }
 }

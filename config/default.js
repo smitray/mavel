@@ -26,5 +26,5 @@ module.exports = {
       ]
     }
   },
-  nuxtBuild: false
+  nuxtBuild: true
 };

@@ -9,7 +9,6 @@
     "build": "node bin/server.build.js",
     "test": "node bin/apptest.js",
     "doc": "apidoc -i src/ -o doc/",
-    "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/server/core",
     "deploy": "node bin/server.deploy.js"
   },
@@ -39,6 +38,7 @@
     "fs-extra": "^6.0.0",
     "grant": "^4.1.0",
     "isdev": "^1.0.1",
+    "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.2.1",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",

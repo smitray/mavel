@@ -45,7 +45,9 @@ const authLocal = async (ctx) => {
   });
   if (signup && !auth) {
     try {
-      user = await userCrud.create({});
+      user = await userCrud.create({
+        full_name: name
+      });
       auth = await authCrud.create({
         name,
         username,
@@ -67,12 +69,15 @@ const authLocal = async (ctx) => {
   } else if (auth && !compareSync(password, auth.password)) {
     ctx.throw(401, { success: 0, message: 'Password given is wrong' });
   }
+  let uid = auth.user;
+  if (user) {
+    uid = user._id;
+  }
   const token = await tokenGenerator({
     auth: auth._id,
-    uid: user._id,
+    uid,
     acc_type: auth.acc_type
   });
-  ctx.cookies.set('token', token);
   ctx.body = {
     success: 1,
     data: {
@@ -84,6 +89,7 @@ const authLocal = async (ctx) => {
 
 const authSocial = async (ctx) => {
   const {
+    name,
     username,
     email,
     scId,
@@ -101,7 +107,9 @@ const authSocial = async (ctx) => {
 
   if (!auth) {
     try {
-      user = await userCrud.create({});
+      user = await userCrud.create({
+        full_name: name
+      });
       auth = await authCrud.create({
         username,
         email,
@@ -126,7 +134,6 @@ const authSocial = async (ctx) => {
     uid: user._id,
     acc_type: auth.acc_type
   });
-  ctx.cookies.set('token', token);
   ctx.body = {
     success: 1,
     data: {

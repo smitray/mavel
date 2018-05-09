@@ -5,7 +5,7 @@ module.exports = {
   },
   db: {
 		host: 'localhost',
-		dbName: 'kibita',
+		dbName: 'mavel',
 		debug: false,
 		options: {
 			userName: false,
@@ -21,5 +21,5 @@ module.exports = {
       "host": "codends.net"
     }
   },
-  baseUrl: 'http://codends.net'
+  baseUrl: 'http://localhost:3050'
 };

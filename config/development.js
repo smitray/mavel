@@ -5,7 +5,7 @@ module.exports = {
   },
   db: {
 		host: 'localhost',
-		dbName: 'kibita',
+		dbName: 'mavel',
 		debug: false,
 		options: {
 			userName: false,
