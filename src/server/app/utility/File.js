@@ -1,11 +1,11 @@
 import { generate } from 'shortid';
-import { join } from 'path';
+import { join, extname } from 'path';
 import fs from 'fs-extra';
 import config from 'config';
 
 const fileUpload = async (file) => {
-  const ext = (file.name).split('.');
-  const newFilename = `${Date.now()}-${generate()}.${ext[1]}`;
+  const ext = extname(file.name);
+  const newFilename = `${Date.now()}-${generate()}${ext}`;
   const filePath = join(config.get('paths.static'), newFilename);
   try {
     await fs.copy(file.path, filePath);
