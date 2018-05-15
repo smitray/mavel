@@ -6,7 +6,7 @@ import {
   authUpdate,
   authLocal,
   authSocial
-} from './controller';
+} from './';
 
 export const baseUrl = '/api/auth';
 
@@ -29,7 +29,7 @@ export const routes = [
   },
   {
     method: 'PUT',
-    route: '/:id',
+    route: '/',
     handlers: [
       isAuthenticated,
       authUpdate

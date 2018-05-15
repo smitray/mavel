@@ -8,9 +8,9 @@
     "prebuild": "rimraf dist",
     "build": "node bin/server.build.js",
     "test": "node bin/apptest.js",
+    "deploy": "node bin/server.deploy.js",
     "doc": "apidoc -i src/ -o doc/",
-    "start": "cross-env NODE_ENV=production node dist/server/core",
-    "deploy": "node bin/server.deploy.js"
+    "start": "cross-env NODE_ENV=production node dist/server/core"
   },
   "repository": {
     "type": "git",

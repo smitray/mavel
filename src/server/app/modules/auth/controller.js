@@ -25,6 +25,48 @@ const tokenGenerator = async (data) => {
   return jwt;
 };
 
+/**
+@api {post} /api/auth/local Local Signup and Login
+@apiName Local Authentication
+@apiGroup Authentication
+@apiParam {String} name User's full name
+@apiParam {String} username User's username
+@apiParam {String} password User's password
+@apiParam {String} email User's email
+@apiParam {String} [accType="user"] User's account type
+@apiParam {Boolean} [signp=false] To toggle between signup and login
+@apiParamExample {json} Signup
+{
+  "name": "John Doe",
+  "username": "johndoe",
+  "password": "test1234",
+  "email": "john@doe.com",
+  "accType": "admin",
+  "signup": true
+}
+@apiParamExample {json} Login
+{
+  "username": "johndoe", //Username or email as value but key should be "username"
+  "password": "test1234"
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "token": "Bearer JWT token"
+  },
+  "message": "Loggedin successfully"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Email or Username exists
+  HTTP/1.1 409 Record conflict
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+@apiErrorExample {json} Wrong form key
+  HTTP/1.1 422 Unprocessable entity
+*/
+
 const authLocal = async (ctx) => {
   const {
     name,
@@ -87,6 +129,43 @@ const authLocal = async (ctx) => {
   };
 };
 
+/**
+@api {post} /api/auth/social Social Signup and Login
+@apiName Social Authentication
+@apiGroup Authentication
+@apiParam {String} name User's full name
+@apiParam {String} username User's username
+@apiParam {String} email User's email
+@apiParam {String} scId Social network ID
+@apiParam {String} scToken Social network token
+@apiParam {String} scType Name of the social network
+@apiParamExample {json} Input
+{
+  "name": "John Doe",
+  "username": "johndoe",
+  "email": "john@doe.com",
+  "scId": "123456789",
+  "scToken": "123456789",
+  "scType": "facebook" // Or twitter / google
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "token": "Bearer JWT token"
+  },
+  "message": "Loggedin successfully"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Email or Username exists
+  HTTP/1.1 409 Record conflict
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+@apiErrorExample {json} Wrong form key
+  HTTP/1.1 422 Unprocessable entity
+*/
+
 const authSocial = async (ctx) => {
   const {
     name,
@@ -143,6 +222,31 @@ const authSocial = async (ctx) => {
   };
 };
 
+/**
+@api {get} /api/auth Get my details
+@apiName Get me
+@apiGroup User
+@apiHeader {String} Authorization JWT
+@apiHeaderExample Header example
+{
+  "Authorization": "Bearer JWT"
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "user": [Object]
+  },
+  "message": "User details fetched successfully"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Email or Username exists
+  HTTP/1.1 404 No record found
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+ */
+
 const authSingle = async (ctx) => {
   try {
     auth = await authCrud.single({
@@ -169,12 +273,37 @@ const authSingle = async (ctx) => {
     ctx.body = {
       success: 1,
       data: {
-        auth
+        user: auth
       },
       message: 'Fetched my details successfully'
     };
   }
 };
+
+/**
+@api {get} /api/auth/:id Get other's details
+@apiName Get other
+@apiGroup User
+@apiHeader {String} Authorization JWT
+@apiHeaderExample Header example
+{
+  "Authorization": "Bearer JWT"
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "user": [Object]
+  },
+  "message": "User details fetched successfully"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Email or Username exists
+  HTTP/1.1 404 No record found
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+ */
 
 const authSingleOther = async (ctx) => {
   try {
@@ -202,12 +331,46 @@ const authSingleOther = async (ctx) => {
     ctx.body = {
       success: 1,
       data: {
-        auth
+        user: auth
       },
       message: 'User details fetched successfully'
     };
   }
 };
+
+/**
+@api {put} /api/auth/ Update auth module
+@apiName Get other
+@apiGroup Authentication
+@apiHeader {String} Authorization JWT
+@apiHeaderExample Header example
+{
+  "Authorization": "Bearer JWT"
+}
+@apiParam {String} password User's password
+@apiParam {String} email User's email
+@apiParamExample {json} Input
+{
+  "email": "john@doe.com",
+  "password": "test123456"
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "auth": [Object]
+  },
+  "message": "auth updated successfully"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Email or Username exists
+  HTTP/1.1 404 No record found
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 422 Unprocessable entity
+ */
 
 const authUpdate = async (ctx) => {
   try {

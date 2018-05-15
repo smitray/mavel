@@ -12,6 +12,39 @@ const bulkUpdate = options => new Promise((resolve, reject) => {
   });
 });
 
+/**
+@api {post} /api/files File upload
+@apiName Upload file
+@apiGroup Utility
+@apiHeader {String} Authorization JWT
+@apiHeaderExample Header example
+{
+  "Authorization": "Bearer JWT"
+}
+@apiParam {String} docs File / Files (Use form data)
+@apiParamExample {json} Input
+{
+  "docs": "file"
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "files": {
+      "filename": "file name",
+      "permalink": "link of the file",
+      "_id": "file ID"
+    }
+  },
+  "message": "All files uploaded"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+@apiErrorExample {json} Wrong form key
+  HTTP/1.1 422 Unprocessable entity
+*/
 
 const filesCreate = async (ctx) => {
   const rawFiles = ctx.request.body.files.docs;
@@ -65,6 +98,40 @@ const filesCreate = async (ctx) => {
     }
   }
 };
+
+/**
+@api {post} /api/files/delete File delete
+@apiName Delete file
+@apiGroup Utility
+@apiHeader {String} Authorization JWT
+@apiHeaderExample Header example
+{
+  "Authorization": "Bearer JWT"
+}
+@apiParam {String} fileId File / Files (Use form data)
+@apiParamExample {json} Input
+{
+  "fileId": "file"
+}
+@apiSuccessExample {json} Success
+{
+  "success": 1,
+  "data": {
+    "files": {
+      "filename": "file name",
+      "permalink": "link of the file",
+      "_id": "file ID"
+    }
+  },
+  "message": "File deleted"
+}
+@apiErrorExample {json} Server error
+  HTTP/1.1 500 Internal Server Error
+@apiErrorExample {json} Wrong credentials
+  HTTP/1.1 401 Not authorized
+@apiErrorExample {json} Wrong form key
+  HTTP/1.1 422 Unprocessable entity
+*/
 
 const deleteFiles = async (ctx) => {
   try {

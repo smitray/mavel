@@ -39,6 +39,10 @@ const authSchema = new mongoose.Schema({
     twitter: {
       id: String,
       token: String
+    },
+    google: {
+      id: String,
+      token: String
     }
   }
 });
