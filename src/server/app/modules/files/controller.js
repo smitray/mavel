@@ -54,8 +54,9 @@ const filesCreate = async (ctx) => {
     await Promise.all(rawFiles.map(async (file) => {
       filename = await fileUpload(file);
       fileNames.push({
-        filename,
-        permalink: `/public/${filename}`
+        filename: filename.file,
+        permalink: `/public/${filename.file}`,
+        thumbnail: `/public/thumbs/${filename.thumbnail}`
       });
     }));
 
@@ -79,8 +80,9 @@ const filesCreate = async (ctx) => {
     filename = await fileUpload(rawFiles);
     try {
       filesNew = await filesCrud.create({
-        filename,
-        permalink: `/public/${filename}`
+        filename: filename.file,
+        permalink: `/public/${filename.file}`,
+        thumbnail: `/public/thumbs/${filename.thumbnail}`
       });
     } catch (e) {
       ctx.throw(422, {
