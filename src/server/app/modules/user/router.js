@@ -1,5 +1,5 @@
 import { isAuthenticated } from '@mid';
-import { userUpdate } from './controller';
+import { userUpdate } from './';
 
 export const baseUrl = '/api/user';
 

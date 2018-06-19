@@ -10,8 +10,9 @@ export const actions = {
         if (jwtCookie) {
           const token = jwtCookie.split('=')[1].replace('Bearer%20', 'Bearer ');
           commit('user/SET_TOKEN', token);
-          app.$axios.setHeader('Authorization', token);
-          return Promise.resolve(dispatch('user/USER_GET_DETAILS'));
+          // app.$axios.setHeader('Authorization', token);
+          // return Promise.resolve(dispatch('user/USER_GET_DETAILS'));
+          return true;
         }
       }
       return false;

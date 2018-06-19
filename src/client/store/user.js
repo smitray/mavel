@@ -17,6 +17,7 @@ export const mutations = {
   UNSET_USER: (state) => {
     state.user = null;
     state.isAuthenticated = false;
+    state.token = null;
   },
   SET_TOKEN: (state, token) => {
     state.token = token;
@@ -33,7 +34,6 @@ export const actions = {
         ...cred
       });
       Cookie.set('token', data.token);
-      this.$axios.setHeader('Authorization', data.token);
       commit('SET_TOKEN', data.token);
       await dispatch('USER_GET_DETAILS');
     } catch (error) {
@@ -46,10 +46,12 @@ export const actions = {
       throw error;
     }
   },
-  async USER_GET_DETAILS({ commit }) {
+  async USER_GET_DETAILS({ commit, state }) {
     try {
+      const { token } = state;
+      this.$axios.setHeader('Authorization', token);
       const { data } = await this.$axios.$get('/api/auth');
-      commit('SET_USER', data.auth);
+      commit('SET_USER', data.user);
     } catch (error) {
       throw error;
     }

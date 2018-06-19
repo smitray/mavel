@@ -19,6 +19,20 @@
       password: '',
       formError: null
     }),
+    async mounted() {
+      if (this.$store.state.user.token) {
+        try {
+          await this.$store.dispatch('user/USER_GET_DETAILS');
+          if (this.$store.state.user.direction) {
+            this.$router.push({
+              name: this.$store.state.user.direction
+            });
+          }
+        } catch (e) {
+          this.formError = e.message;
+        }
+      }
+    },
     methods: {
       async authorize() {
         try {

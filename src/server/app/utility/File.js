@@ -46,7 +46,7 @@ const fileDelete = async (file) => {
   try {
     await fs.remove(filePath);
   } catch (e) {
-    console.log(e); //eslint-disable-line
+    throw new Error(e.message);
   }
   return file;
 };
