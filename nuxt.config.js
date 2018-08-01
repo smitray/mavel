@@ -1,6 +1,4 @@
-const isDev = require('isdev');
 const cfg = require('config');
-const path = require('path');
 
 module.exports = {
   srcDir: cfg.get('paths.app.client'),
@@ -18,7 +16,6 @@ module.exports = {
     ]
   },
   css: [
-    'normalize.css',
     '@/assets/css/main.css'
   ],
   loading: { color: '#3B8070' },
@@ -26,46 +23,6 @@ module.exports = {
     vendor: [],
     extractCSS: {
       allChunks: true
-    },
-    postcss: {
-      plugins: {
-        'postcss-partial-import': {},
-        'postcss-crip': {},
-        'postcss-nested-props': {},
-        'postcss-map': {
-          basePath: path.resolve(__dirname, 'styleVars'),
-          maps: [
-            'fonts.yml',
-            'colors.yml'
-          ]
-        },
-        'postcss-mixins': {},
-        'postcss-advanced-variables': {},
-        'postcss-short': {},
-        'postcss-cssnext': {
-          browsers: [
-            'last 5 versions',
-            'Opera 12.1',
-            'safari >= 8',
-            'ie >= 10',
-            'ff >= 20',
-            'ios 6',
-            'android 4',
-            'ie >= 9'
-          ],
-          features: {
-            nesting: false
-          }
-        },
-        'postcss-nested': {},
-        'postcss-ref': {},
-        'postcss-property-lookup': {},
-        'postcss-utilities': {},
-        'rucksack-css': {},
-        'postcss-extend': {},
-        'postcss-merge-rules': {},
-        'css-mqpacker': {}
-      }
     }
   },
   modules: [
